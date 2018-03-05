@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace game_teamrob
 {
-    //k
+    
     class Program
     {
         enum grondstoffen { gras, steen, coal, iron, goud };
@@ -16,7 +16,9 @@ namespace game_teamrob
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             Console.WindowWidth = 120;
-            Console.WindowHeight = 60;
+            Console.WindowHeight = 49;
+            int locatieX = 1;
+            int locatieY = 58;
             int[,] field = {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },//61
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},//62
@@ -82,6 +84,76 @@ namespace game_teamrob
             drawer(field, 60);
             elementen(field);
             tekending(field);
+            Console.SetCursorPosition(locatieX, locatieY);
+            Console.Write('0');
+            while (true)
+            {
+               
+                if (Console.KeyAvailable)
+                {
+                    
+                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+                    if (keyInfo.Key == ConsoleKey.LeftArrow)
+                    {
+                        locatieX = locatieX - 1;
+                        if (locatieX < 0)
+                        {
+                            locatieX = 0;
+                        }
+                       
+                        Console.SetCursorPosition(locatieX + 1, locatieY);
+                        Console.Write(' ');
+
+                    }
+                    if (keyInfo.Key == ConsoleKey.UpArrow)
+                    {
+                        locatieY = locatieY - 1;
+                        if (locatieY < 0)
+                        {
+                            locatieY = 0;
+                        }
+                        Console.SetCursorPosition(locatieX, locatieY+1);
+                        Console.Write(' ');
+
+
+                    }
+                    if (keyInfo.Key == ConsoleKey.RightArrow)
+                    {
+                        
+                        locatieX = locatieX + 1;
+                        if (field[locatieY,locatieX] > 0)
+                        {
+                            locatieX = locatieX - 1;
+                        }
+                        else
+                        {
+                            if (locatieX > Console.WindowWidth)
+                            {
+                                locatieX = Console.WindowWidth;
+                            }
+                            Console.SetCursorPosition(locatieX - 1, locatieY);
+                            Console.Write(' ');
+                        }
+                        
+                        
+                        
+
+                    }
+                    if (keyInfo.Key == ConsoleKey.Spacebar)
+                    {
+                        
+                            Console.SetCursorPosition(locatieX + 1, locatieY);
+                            Console.Write('A');
+                            field[locatieY, locatieX+1] = 0;
+                        
+                        
+
+                    }
+
+                    Console.SetCursorPosition(locatieX, locatieY);
+                    Console.Write('0');
+                }
+            }
             Console.ReadLine();
         }
         static void drawer(int[,] ingave, int vlaktelvl)
@@ -218,7 +290,7 @@ namespace game_teamrob
                     else if (ingave[row, col] == 3)
                     {
                         Console.ForegroundColor = ConsoleColor.Black;
-                        Console.Write(blok);//k
+                        Console.Write(blok);
                     }
                     else if (ingave[row, col] == 4)
                     {
@@ -239,6 +311,7 @@ namespace game_teamrob
 
             }
         }// einde tekendingd
+        
     }
 
 }
