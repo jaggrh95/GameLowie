@@ -218,7 +218,7 @@ namespace game_teamrob
                     else if (ingave[row, col] == 3)
                     {
                         Console.ForegroundColor = ConsoleColor.Black;
-                        Console.Write(blok);
+                        Console.Write(blok);//k
                     }
                     else if (ingave[row, col] == 4)
                     {
