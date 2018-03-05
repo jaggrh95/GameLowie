@@ -238,7 +238,7 @@ namespace game_teamrob
                 }
 
             }
-        }// einde tekending
+        }// einde tekendingd
     }
 
 }
